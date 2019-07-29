@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="../stylesheets/admin.css" rel="stylesheet">
+
+    <!-- Website Font style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+    <title>Admin</title>
+</head>
+<body>
+<div class="panel col-md-3" id="mainProfile" title="프로필" style="display:block">
+    <div class="row main">
+        <div class="main-login main-center">
+            <form class="form-horizontal" id="profileForm" method="post" action="#">
+
+                <div class="form-group">
+                    <label for="dg_name" class="cols-sm-2 control-label">이름</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="name" id="dg_name"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dg_username" class="cols-sm-2 control-label">아이디</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="name" id="dg_username"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dg_address" class="cols-sm-2 control-label">지역</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="address" id="dg_address" value="test" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dg_interestedPart" class="cols-sm-2 control-label">관심 부위</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="interestedPart" id="dg_interestedPart" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dg_bodyType" class="cols-sm-2 control-label">체형</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="bodyType" id="dg_bodyType" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dg_weakPart" class="cols-sm-2 control-label">부족한 부분</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control " name="confirm" id="dg_weakPart"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dg_strongPart" class="cols-sm-2 control-label">강한 부분</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control " name="strongPart" id="dg_strongPart"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnAddFriend">친구추가</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnMakeChat">대화신청</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnBlock">차단하기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../javascripts/moment.min.js"></script>
+
+<script src="../javascripts/mainProfile.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>메인화면</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="../stylesheets/main.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+<body>
+
+    <div class="container">
+        <h3>메인</h3>
+        <ul class="nav nav-tabs">
+
+            <li class="active">
+                <a href="javascript:void(0)" class="tablinks" id="tabConnStatus">접속자</a></li>
+            <li><a href="#" class="tablinks" id="tabChatStatus">대화</a></li>
+            <li><a href="#" class="tablinks" id="tabFriend">친구</a></li>
+            <li><a href="#" class="tablinks" id="tabOther">설정</a></li>
+        </ul>
+        <br>
+
+        <!-- 로그인 -->
+        <div class="divLogin">
+
+            <img src="../images/unnamed.jpg" id="creatorImage" />
+
+            <!-- 접속 정보 -->
+            <div class="infoConnected">
+                <h2>Who are you?</h2>
+                <br/>
+
+                <form class="loginForm">
+                    <input type="text" id="yourName" placeholder="Your nick name" /><br/>
+                    <input type="text" id="yourAddress" placeholder="Your Address" /><br/>
+                    <input type="text" id="yourInterestedPart" placeHolder="Your Interested Part" /> <br/>
+                    <input type="submit" id="yourEnter" value="ENTER" />
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- Chat From -->
+        <div class="divChatFrom">
+
+            <div class="infoInside">
+                <h2>Chat with </h2>
+                <br/>
+
+                <form class="chatFromForm">
+                    <input type="text" id="fromName"  /><br/>
+                    <input type="text" id="fromAddress"  /><br/>
+                    <input type="text" id="fromPart"  /><br/>
+                    <input type="button" id="btnChatFromOk" value="확인" />
+                    <input type="button" id="btnChatFromCancel" value="취소" />
+                </form>
+
+            </div>
+        </div>
+
+        <div class="panel col-md-9" id="tcConnStatus">
+            <table class="table table-list-search" id="tblConnStatus">
+                <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>접속자</th>
+                    <th>위치</th>
+                    <th>부위</th>
+                    <th>클라이언ID</th>
+                    <th>아이디</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+            <input type="button" id="btnRefresh" value="새로고침" />
+
+        </div>
+        <input type="button" id="btnRequest" value="요청" />
+
+        <div class="panel col-md-9" id="tcChatStatus">
+            <table class="table table-list-search" id="tblChatStatus">
+                <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>프로필</th>
+                    <th>내용</th>
+                    <th>날짜</th>
+                    <th>대화ID</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel col-md-9" id="tcOther">
+            <table class="table table-list-search" id="tblOther">
+                <thead>
+                <tr>
+                    <th>설정</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>프로필설정</td>
+                </tr>
+                <tr>
+                    <td>친구설정</td>
+                </tr>
+                <tr>
+                    <td>스케줄 설정</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel col-md-9" id="tcFriend">
+            <table class="table table-list-search" id="tblFriend">
+                <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>접속여부</th>
+                    <th>클라이언트ID</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+            <input type="button" id="btnFriendRefresh" value="새로고침" />
+
+        </div>
+
+        <div class="panel col-md-9" id="dialogChat" title="대화하기" style="display:none">
+            <legend>대화하기</legend>
+            <div class="chatscreen">
+                <ul class="chats">
+                    <!-- The chat messages will go here -->
+                </ul>
+            </div>
+            <footer>
+
+                <form id="chatform">
+
+                    <textarea id="message" placeholder="Write something.."></textarea>
+                    <input type="submit" id="submit" value="SEND"/>
+
+                </form>
+
+            </footer>
+        </div>
+
+        <div class="panel col-md-9" id="dialogChatFromChat" title="대화하기" style="display:none">
+            <legend>대화응답</legend>
+            <div class="chatscreen">
+                <ul class="chats">
+                    <!-- The chat messages will go here -->
+                </ul>
+            </div>
+            <footer>
+
+                <form id="chatformFromChat">
+
+                    <textarea id="messageFromChat" placeholder="Write something.."></textarea>
+                    <input type="submit" id="submitFromChat" value="SEND"/>
+
+                </form>
+
+            </footer>
+        </div>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" action="/file-upload">
+        <input type="file" name="thumbnail">
+    <input type="submit">
+    </form>
+
+    <div id="dialog" title="프로필" style="display:none">
+        <div class="row main">
+            <div class="main-login main-center">
+                <form class="form-horizontal" id="profileForm" method="post" action="#">
+
+                    <div class="form-group">
+                        <label for="dg_name" class="cols-sm-2 control-label">이름</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="name" id="dg_name"  />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_username" class="cols-sm-2 control-label">아이디</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="name" id="dg_username"  />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_address" class="cols-sm-2 control-label">지역</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="address" id="dg_address" value="test" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_interestedPart" class="cols-sm-2 control-label">관심 부위</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="interestedPart" id="dg_interestedPart" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_bodyType" class="cols-sm-2 control-label">체형</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="bodyType" id="dg_bodyType" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_weakPart" class="cols-sm-2 control-label">부족한 부분</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control " name="confirm" id="dg_weakPart"  />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_strongPart" class="cols-sm-2 control-label">강한 부분</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control " name="strongPart" id="dg_strongPart"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnAddFriend">친구추가</button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnMakeChat">대화신청</button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnBlock">차단하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dialogFriendConf" title="친구찾기설정" style="display:none">
+        <div class="row main">
+            <div class="main-login main-center">
+                <form class="form-horizontal" id="friendConfForm" method="post" action="#">
+
+                    <div class="form-group">
+                        <label for="dg_conf_address" class="cols-sm-2 control-label">지역 설정</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="address" id="dg_conf_address" value="test" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_conf_interestedPart" class="cols-sm-2 control-label">관심 부위 설정</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="interestedPart" id="dg_conf_interestedPart" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_conf_bodyType" class="cols-sm-2 control-label">체형 설정</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="bodyType" id="dg_conf_bodyType" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_conf_weakPart" class="cols-sm-2 control-label">부족한 부분 설정</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control " name="confirm" id="dg_conf_weakPart"  />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_conf_strongPart" class="cols-sm-2 control-label">강한 부분 설정</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control " name="strongPart" id="dg_conf_strongPart"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <button type="submit"class="btn btn-primary btn-lg btn-block login-button" id="btnFriendConfApply">적용하기</button>
+                        <button type="button"class="btn btn-primary btn-lg btn-block login-button" id="btnFriendConfInit">초기화</button>
+                        <button type="button"class="btn btn-primary btn-lg btn-block login-button" id="btnFriendConfCancel">취소</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!--<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="../javascripts/moment.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script src="../javascripts/main.js"></script>
+
+
+
+</body>
+</html>

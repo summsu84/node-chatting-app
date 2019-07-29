@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>스케줄 관리</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- MetisMenu CSS -->
+    <link href="../stylesheets/metismenu/metismenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="../stylesheets/datatables/datatables.bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="../stylesheets/datatables/datatables.responsive.css" rel="stylesheet">
+    <!-- jQuery DataTables CSS -->
+    <!-- <link href="./css/datatables/jquery.datatables.min.css" rel="stylesheet"> -->
+    <!-- Timeline CSS -->
+    <!-- <link href="./css/timeline.css" rel="stylesheet"> -->
+    <!-- Custom CSS -->
+    <link href="../stylesheets/admin.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <!-- <link href="./css/morris/morris.css" rel="stylesheet"> -->
+    <!-- Custom Fonts -->
+    <link href="../stylesheets/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <!-- import -->
+    <!--<link rel="import" href="./mainSchedule.html">-->
+    <![endif]-->
+    <style type="text/css">
+        table.dataTable.compact thead th,
+        table.dataTable.compact thead td { padding: 4px 4px 4px 4px; text-align:center; vertical-align:middle; }
+        table.dataTable.compact tfoot th,
+        table.dataTable.compact tfoot td { padding: 4px; }
+        table.dataTable.compact tbody th,
+        table.dataTable.compact tbody td { padding: 4px; }
+    </style>
+</head>
+<body>
+       <!-- /.row -->
+
+       <div class="panel col-md-9" id="mainSchedule" title="대화하기" style="display:block">
+
+           <div class="row">
+               <ul class="nav nav-tabs">
+
+                   <li class="active" num="1">
+                       <a href="javascript:void(0)" class="tablinks" id="tab_1">1일차</a></li>
+                   <li class="hidden" num="2"><a href="javascript:void(0)" class="tablinks" id="tab_2">2일차</a></li>
+                   <li class="hidden" num="3"><a href="javascript:void(0)" class="tablinks" id="tab_3">3일차</a></li>
+                   <li class="hidden" num="4"><a href="javascript:void(0)" class="tablinks" id="tab_4">4일차</a></li>
+                   <li class="hidden" num="5"><a href="javascript:void(0)" class="tablinks" id="tab_5">5일차</a></li>
+                   <li class="hidden" num="6"><a href="javascript:void(0)" class="tablinks" id="tab_6">6일차</a></li>
+                   <li class="hidden" num="7"><a href="javascript:void(0)" class="tablinks" id="tab_7">7일차</a></li>
+
+               </ul>
+               <input type="button" id="btnTabAdd" value="더하기"/>
+               <br>
+           </div>
+
+            <div class="formContents">
+            <!-- 컨텐츠 -->
+                <div class="panel col-md-9" id="tcExDay_1">
+                    <h4>1일차</h4>
+                    <table class="table table-list-search" id="tblExday_1">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>이름</th>
+                            <th>회수</th>
+                            <th>셋트</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 컨텐츠 -->
+                <div class="panel col-md-9" id="tcExDay_2">
+                    <h4>2일차</h4>
+                    <table class="table table-list-search" id="tblExday_2">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>이름</th>
+                            <th>회수</th>
+                            <th>셋트</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 컨텐츠 -->
+                <div class="panel col-md-9" id="tcExDay_3">
+                    <h4>3일차</h4>
+                    <table class="table table-list-search" id="tblExday_3">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>이름</th>
+                            <th>회수</th>
+                            <th>셋트</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel col-md-9" id="tcExDay_4">
+                    <h4>4일차</h4>
+                    <table class="table table-list-search" id="tblExday_4">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>이름</th>
+                            <th>회수</th>
+                            <th>셋트</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel col-md-9" id="tcExDay_5">
+                    <h4>5일차</h4>
+                    <table class="table table-list-search" id="tblExday_5">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>이름</th>
+                            <th>회수</th>
+                            <th>셋트</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel col-md-9" id="tcExDay_6">
+                    <h4>6일차</h4>
+                    <table class="table table-list-search" id="tblExday_6">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>이름</th>
+                            <th>회수</th>
+                            <th>셋트</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel col-md-9" id="tcExDay_7">
+                    <h4>7일차</h4>
+                    <table class="table table-list-search" id="tblExday_7">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>이름</th>
+                            <th>회수</th>
+                            <th>셋트</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="form-horizontal col-md-9">
+
+
+                <form class="form-horizontal" id="formExReg">
+                    <fieldset>
+
+                        <!-- Form Name -->
+                        <legend>입력하기</legend>
+                        <input type="button" id="btnPartAdd" value="부위 더하기" />
+                        <input type="button" id="btnPartDel" value="부위 빼기" />
+
+
+                        <!-- Text input-->
+                        <div id="divPartListGroup">
+                            <div class="part-list" id="partList_1">
+                                <div id="divPart">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="selPart">PART</label>
+                                        <div class="col-md-5">
+                                            <select id="selPart" name="selRoute" class="form-control">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input type="button" class="btnExAdd" id="btnExAdd" value="더하기" />
+                                    <input type="button" class="btnExDel" id="btnExDel" value="빼기" />
+                                </div>
+
+                                <!-- EX -->
+                                <div id="divExList">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="selEx">NAME</label>
+                                        <div class="col-md-5">
+                                            <select id="selEx" name="selEx" class="form-control">
+                                            </select>
+                                        </div>
+                                        <label class='col-md-4 control-label' for='selEa'>EA</label>
+                                        <div class='col-md-5'>
+                                            <select id='selEa' name='selEa' class='form-control'>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                            </select>
+                                        </div>
+                                        <label class="col-md-4 control-label" for="selSet">SET</label>
+                                        <div class="col-md-5">
+                                            <select id="selSet" name="selSet" class="form-control">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <input type="button" id="btnExReg" value="등록하기" />
+                    <input type="button" id="btnExInit" value="초기화하기" />
+                    <input type="button" id="btnExCancel" value="취소하기" />
+
+                </form>
+            </div>
+       </div>
+
+
+
+
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!--<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="../javascripts/moment.min.js"></script>
+<!--<script src="/socket.io/socket.io.js"></script>-->
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script src="../javascripts/mainSchedule.js"></script>
+
+
+
+</body>
+</html>

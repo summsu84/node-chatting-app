@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="../stylesheets/mainProfile.css" rel="stylesheet">
+
+    <!-- Website Font style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+    <title>Admin</title>
+</head>
+<body>
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">회원 정보</h1>
+                <hr />
+            </div>
+        </div>
+        <div class="main-login main-center">
+            <form class="form-horizontal" method="post" action="#">
+
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Your Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="name" id="name"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address" class="cols-sm-2 control-label">Address</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="address" id="address"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="interestedPart" class="cols-sm-2 control-label">부위</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="interestedPart" id="interestedPart"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bodyType" class="cols-sm-2 control-label">체형</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="bodyType" id="bodyType"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="strongPart" class="cols-sm-2 control-label">강한부위</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="strongPart" id="strongPart"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="weakPart" class="cols-sm-2 control-label">약한부위</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="weakPart" id="weakPart"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">Password</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnModify">수정하기</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnCancel">취소</button>
+                </div>
+                <div class="login-register">
+                    <a href="index.php">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="dialog" title="관심친구설정" style="display:none">
+        <div class="row main">
+            <div class="main-login main-center">
+                <form class="form-horizontal" method="post" action="#">
+                    <div class="form-group">
+                        <label for="dg_address" class="cols-sm-2 control-label">지역</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                <select class="form-control" name="address" id="dg_address" >
+                                    <option value="도봉구">도봉구</option>
+                                    <option value="강북구">강북구</option>
+                                    <option value="노원구">노원구</option>
+                                    <option value="은평구">은평구</option>
+                                    <option value="종로구">종로구</option>
+                                    <option value="동대문구">동대문구</option>
+                                    <option value="중랑구">중랑구</option>
+                                    <option value="서대문구">서대문구</option>
+                                    <option value="중구">중구</option>
+                                    <option value="성동구">성동구</option>
+                                    <option value="광진구">광진구</option>
+                                    <option value="용산구">용산구</option>
+                                    <option value="마포구">마포구</option>
+                                    <option value="강서구">강서구</option>
+                                    <option value="양천구">양천구</option>
+                                    <option value="구로구">구로구</option>
+                                    <option value="영등포구">영등포구</option>
+                                    <option value="금천구">금천구</option>
+                                    <option value="관악구">관악구</option>
+                                    <option value="동작구">동작구</option>
+                                    <option value="서초구">서초구</option>
+                                    <option value="강남구">강남구</option>
+                                    <option value="송파구">송파구</option>
+                                    <option value="강동구">강동구</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_interestedPart" class="cols-sm-2 control-label">관심 부위</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="interestedPart" id="dg_interestedPart" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_bodyType" class="cols-sm-2 control-label">체형</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="bodyType" id="dg_bodyType" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_weakPart" class="cols-sm-2 control-label">부족한 부분</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control " name="confirm" id="dg_weakPart"  />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dg_strongPart" class="cols-sm-2 control-label">강한 부분</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control " name="strongPart" id="dg_strongPart"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnAddFriend">친구추가</button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnMakeChat">대화신청</button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnBlock">차단하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../javascripts/moment.min.js"></script>
+
+<script src="../javascripts/mainProfile.js"></script>
+
+</body>
+</html>

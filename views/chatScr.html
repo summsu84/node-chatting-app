@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>대화창</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="../stylesheets/mat_stylesheet.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h3>메인</h3>
+        <div class="chatscreen">
+
+            <ul class="chats">
+                <!-- The chat messages will go here -->
+            </ul>
+
+        </div>
+
+        <footer>
+
+            <form id="chatform">
+
+                <textarea id="message" placeholder="Write something.."></textarea>
+                <input type="submit" id="submit" value="SEND"/>
+
+            </form>
+
+        </footer>
+    </div>
+    <script src="../javascripts/moment.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../javascripts/main.js"></script>
+    <script src="../javascripts/chatScr.js"></script>
+        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+
+</body>
+</html>

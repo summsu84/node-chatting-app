@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link href="../stylesheets/style.css" rel="stylesheet">
+    <link href="../stylesheets/jw-jqm-cal.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../javascripts/moment.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../javascripts/common.js"></script>
+    <script src="../javascripts/mMain.js"></script>
+    <script src="../javascripts/jquery/jw-jqm-cal.js"></script>
+</head>
+<body>
+
+    <!-- 로그인 -->
+    <!--<div data-role="page">
+        <div data-role="header" data-theme="c">
+            <h1>로그인</h1>
+        </div>&lt;!&ndash; /header &ndash;&gt;
+        <div role="main" class="ui-content">
+            <h3>Sign In</h3>
+            <label for="txt-username">User Name</label>
+            <input type="text" name="txt-username" id="txt-username" value="">
+            <label for="txt-password">Password</label>
+            <input type="password" name="txt-password" id="txt-password" value="">
+            <fieldset data-role="controlgroup">
+                <input type="checkbox" name="chck-rememberme" id="chck-rememberme" checked="">
+                <label for="chck-rememberme">Remember me</label>
+            </fieldset>
+            <a href="#" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-login-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Submit</a>
+            <p class="mc-top-margin-1-5"><a href="begin-password-reset.html">Can't access your account?</a></p>
+            &lt;!&ndash;<p class="mc-top-margin-1-5"><a href="mSignup.html">Signup</a></p> 테스트 전&ndash;&gt;
+            <p class="mc-top-margin-1-5"><a href="mSignup.html">Signup</a></p>
+
+            <div data-role="popup" id="dlg-invalid-credentials" data-dismissible="false" style="max-width:400px;">
+                <div role="main" class="ui-content">
+                    <h3 class="mc-text-danger">Login Failed</h3>
+                    <p>Did you enter the right credentials?</p>
+                    <div class="mc-text-center"><a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+                </div>
+            </div>
+        </div>&lt;!&ndash; /content &ndash;&gt;
+    </div>--><!-- /page -->
+
+
+    <!-- 메인 접속자 현황 -->
+    <div data-role="page" id="mainConnStatus">
+        <div data-role="header" data-position="fixed">
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
+            <a href="mMainUserProfile.html" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">설정</a>
+            <h1>접속자 현황</h1>
+        </div>
+
+        <div data-role="main" class="ui-content">
+
+            <div data-role="tabs" id="tabs">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#one" data-ajax="false">All</a></li>
+                        <li><a href="#two" data-ajax="false">Friend</a></li>
+                    </ul>
+                </div>
+                <div id="one" class="ui-body-d ui-content">
+                    <form class="ui-filterable">
+                        <input id="myFilter" data-type="search">
+                    </form>
+                    <ul data-role="listview" id="listViewMainConnStatus" data-filter="true" data-input="#myFilter" data-autodivers="true" data-inset="true">
+
+                    </ul>
+                </div>
+                <div id="two" >
+                    <form class="ui-filterable">
+                        <input id="mainFriendStatusFilter" data-type="search">
+                    </form>
+                    <ul data-role="listview" id="listViewMainFriendStatus" data-filter="true" data-input="#mainFriendStatusFilter" data-autodivers="true" data-inset="true">
+
+                    </ul>
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div data-role="footer" class="ui-btn-active ui-state-persist" data-id="mainFooter" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#mainConnStatus" class="btnMainConnStatus" id="btnMainConnStatus" data-icon="user">Browse</a></li>
+                    <!--<li><a href="#mainFriendStatus" id="btnMainFriendStatus" data-icon="user">친구</a></li>-->
+                    <li><a href="#mainChatStatus" class="btnMainChatStatus" id="btnMainChatStatus" data-icon="comment">Chat</a></li>
+                    <li><a href="mCalendar.html" class="btnChatSchedule" id="btnMainSchedule" data-icon="calendar">Schedule</a></li>
+                    <!--<li><a href="#" id="btnMainChat" data-icon="delete">채팅</a></li>
+                    <li><a href="mMainUserProfile.html" id="btnMainUserProfile" data-icon="delete">프로필</a></li>-->
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- 친구 현황 -->
+    <div data-role="page" id="mainFriendStatus">
+        <div data-role="header" data-position="fixed">
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+            <h1>Welcome</h1>
+        </div>
+
+        <div data-role="main" class="ui-content">
+           <!-- <form class="ui-filterable">
+                <input id="mainFriendStatusFilter" data-type="search">
+            </form>
+            <ul data-role="listview" id="listViewMainFriendStatus" data-filter="true" data-input="#mainFriendStatusFilter" data-autodivers="true" data-inset="true">
+
+            </ul>-->
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#mainConnStatus" id="btnFriendConnStatus" data-icon="user">접속자</a></li>
+                    <li><a href="#mainFriendStatus" id="btnFriendFriendStatus" data-icon="user">친구</a></li>
+                    <li><a href="#mainChatStatus" id="btnFriendChatStatus" data-icon="comment">대화목록</a></li>
+                    <li><a href="#mainSchedule" id="btnFriendSchedule" data-icon="calendar">스케줄</a></li>
+                    <li><a href="#" id="btnFriendChat" data-icon="delete">채팅</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 대화 목록 -->
+    <div data-role="page" id="mainChatStatus">
+        <div data-role="header" data-position="fixed">
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+            <h1>Welcome</h1>
+        </div>
+
+        <div data-role="main" class="ui-content" id="friendMain">
+            <form class="ui-filterable">
+                <input id="mainChatStatusFilter" data-type="search">
+            </form>
+            <ul data-role="listview" id="listViewMainChatStatus" data-filter="true" data-input="#mainChatStatusFilter" data-autodivers="true" data-inset="true">
+
+            </ul>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#mainConnStatus"  class="btnMainConnStatus" id="btnChatConnStatus" data-icon="user">Browse</a></li>
+                    <li><a href="#mainChatStatus"  class="btnChatChatStatus" id="btnChatChatStatus" data-icon="comment">Chat</a></li>
+                    <li><a href="#mainSchedule"  class="btnChatSchedule" id="btnChatSchedule" data-icon="calendar">Schedule</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="page" id="mainProfile">
+        <div data-role="header" data-position="fixed">
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+            <h1>Welcome</h1>
+        </div>
+
+        <div data-role="main" class="ui-content">
+
+            <img id="employeePic"/>
+            <div id="employeeDetails">
+                <h3 id="userName"></h3>
+                <p id="name"></p>
+                <p id="address"></p>
+            </div>
+
+            <ul id="actionList" data-role="listview" data-inset="true"></ul>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#" data-icon="comment" id="mainProfileChat">대화하기</a></li>
+                    <li><a href="#" data-icon="plus" id="mainProfileAddFriend">친구추가</a></li>
+                    <li><a href="#" data-icon="plus" id="mainProfileDeleteFriend">친구제거</a></li>
+                    <li><a href="#" data-icon="delete" id="mainProfileBlockFriend">차단하기</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 스케줄 -->
+    <div data-role="page" id="mainSchedule">
+        <div data-role="header" data-position="fixed">
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+            <h1>Welcome</h1>
+        </div>
+
+        <div data-role="main" class="ui-content" id="scheduelMain">
+
+            <div id="container1">
+
+            </div>
+
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#mainScheduleAdd" data-icon="comment">신규작성</a></li>
+                    <li><a href="#" data-icon="plus">수정하기</a></li>
+                    <li><a href="#" data-icon="delete">삭제하기</a></li>
+                    <!--                    <li><a href="#" data-icon="check">Like</a></li>
+                                        <li><a href="#" data-icon="info">Information</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="page" id="mainScheduleAdd">
+        <div data-role="header" data-position="fixed">
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+            <h1>Welcome</h1>
+        </div>
+
+        <div data-role="main" class="ui-content" id="scheduleMainAdd">
+
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <!-- Day 더하기 -->
+                <a href="#" data-role="button" data-inline="true" data-icon="plus" id="btnScheduleDayAdd">Day추가</a>
+                <a href="#" data-role="button" data-inline="true" data-icon="minus" id="btnScheduleDayDelete">Day삭제</a>
+
+            </fieldset>
+
+            <div id="container2">
+
+            </div>
+
+        </div>
+        <a href="#" id="btnScheduleAddSave" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">저장하기</a>
+        <a href="#" id="btnScheduleAddCancel" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">취소하기</a>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#" data-icon="comment" >신규작성</a></li>
+                    <li><a href="#" data-icon="plus">수정하기</a></li>
+                    <li><a href="#" data-icon="delete">삭제하기</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="page" id="mainScheduleMod">
+        <div data-role="header" data-position="fixed">
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+            <h1>Welcome</h1>
+        </div>
+
+        <div data-role="main" class="ui-content" id="scheduleMainMod">
+
+
+            <div id="container3">
+
+            </div>
+
+        </div>
+        <!--<a href="#" id="btnScheduleAdd" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">저장하기</a>-->
+        <!--<a href="#" id="btnScheduleCancel" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">취소하기</a>-->
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#" data-icon="comment">신규작성</a></li>
+                    <li><a href="#" data-icon="plus">수정하기</a></li>
+                    <li><a href="#" data-icon="delete">삭제하기</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 채팅 -->
+    <div data-role="page" id="chatPage" data-role="page" data-theme="a">
+
+        <div data-role="header" data-position="fixed">
+            <a href="#mainConnStatus" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+            <h1>Welcome</h1>
+        </div>
+
+        <div data-role="content">
+            <div id="incomingMessages" name="incomingMessages" class="msgContainerDiv" ></div>
+            <label for="messageText"><strong>Message:</strong></label>
+            <textarea name="messageText" id="messageText"></textarea>
+
+            <fieldset class="ui-grid-a">
+                <div class="ui-block-a"><a href="#loginPage" id="goBackButton" data-role="button">Go Back</a></div>
+                <div class="ui-block-b"><button data-theme="a" id="chatSendButton" name="chatSendButton">Send</button>></div>
+            </fieldset>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <h4>Pub Nub Chat</h4>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</body>
+</html>

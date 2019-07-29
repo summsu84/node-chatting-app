@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQM Complex Demo</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=no; target-densityDpi=device-dpi"/>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+    <!--<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>-->
+    <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+</head>
+<body>
+
+
+<div data-role="page" id="mainCalendarInputForm">
+    <div data-role="header" data-position="fixed">
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>Welcome</h1>
+    </div>
+
+        <div data-role="content">
+
+            <form method="post" action="#" id="formCalendarSave">
+                <label for="calendarInputForm_sel_item"></label>
+                <!--<input type="text" name="txt-address" id="txt-address" value="">-->
+                <select name="calendarInputForm_sel_item" id="calendarInputForm_sel_item"></select>
+                <a href="#dlg-sign-up-sent" data-rel="popup" data-transition="pop" data-position-to="window" id="btn_cancel" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">취소</a>
+                <a href="#dlg-sign-up-sent" data-rel="popup" data-transition="pop" data-position-to="window" id="btn_submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">저장</a>
+            </form>
+
+        </div>
+        <script type="text/javascript">
+            $(function() {
+
+                console.log("mainCalendarInputForm!");
+                $('#mainCalendarInputForm').on('pageshow', function (event) {
+
+                    var parameters = $(this).data("url").split("?")[1];
+                    var parameter = parameters.replace("structure=","");
+                    console.log("parameter : " + parameter);
+
+                    var date = parameter.split("&")[0];
+                    getCalendarInputFormPartInformation(createCalendarInputFormPartHtml);
+
+                });
+
+                function getCalendarInputFormPartInformation(callback)
+                {
+                    $.ajax({
+                        url		: "/info/part",
+                        type	: "GET",
+                        success	: function(data) {
+                            console.log("sucess..");
+
+                            callback(data);
+
+                        },
+                        error	: function(request, status, error) {
+                            console.log(error);
+                        }
+                    });
+
+
+                }
+                function createCalendarInputFormPartHtml(array) {
+
+                    for (var i in array) {
+                        var obj = array[i];
+                        var option = $('<option>').attr({'value': obj._id}).append(obj.partName).appendTo('#calendarInputForm_sel_item');
+                    }
+                }
+
+            });
+
+            </script>
+</div>
+</body>
+</html>

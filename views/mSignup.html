@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link href="../stylesheets/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../javascripts/moment.min.js"></script>
+    <script src="../javascripts/mSignup.js"></script>
+
+</head>
+<body>
+<div data-role="page" id="pageSignup" data-add-back-btn="true" data-back-btn-text="뒤로가기">
+    <div data-role="header" data-theme="c">
+        <h1>가입하기</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content">
+        <h3>회원가입</h3>
+        <form method="post" action="#" id="form-signUp">
+        <label for="txt_user_id">아이디</label>
+        <input type="text" name="txt_user_id" id="txt_user_id" value="">
+        <label for="txt_name">이름</label>
+        <input type="text" name="txt_name" id="txt_name" value="">
+        <label for="sel_city">시</label>
+        <!--<input type="text" name="txt-address" id="txt-address" value="">-->
+        <select name="sel_city" id="sel_city"></select>
+        <label for="sel_gu">구</label>
+        <!--<input type="text" name="txt-address" id="txt-address" value="">-->
+        <select name="sel_gu" id="sel_gu"></select>
+        <label for="txt_body_type">체형</label>
+        <select name="txt_body_type" id="txt_body_type"></select>
+
+        <label for="sel_interested_part">관심 부위</label>
+        <select name="sel_interested_part" id="sel_interested_part"></select>
+
+        <label for="sel_strong_part">강한 부위</label>
+        <select name="sel_strong_part" id="sel_strong_part"></select>
+        <label for="sel_weak_part">약한 부위</label>
+        <select name="sel_weak_part" id="sel_weak_part"></select>
+        <label for="txt_password">비밀번호</label>
+        <input type="password" name="txt_password" id="txt_password" value="">
+        <label for="txt_password_confirm">비밀번호 확인</label>
+        <input type="password" name="txt_password_confirm" id="txt_password_confirm" value="">
+        <!--<a href="#" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Submit</a>-->
+
+            <input type="button" id="btn-submit" value="submit">
+        </form>
+        <div data-role="popup" id="dlg-sign-up-sent" data-dismissible="false" style="max-width:400px;">
+            <div data-role="header">
+                <h1>Almost done...</h1>
+            </div>
+            <div role="main" class="ui-content">
+                <h3>Confirm Your Email Address</h3>
+                <p>We sent you an email with instructions on how to confirm your email address. Please check your inbox and follow the instructions in the email.</p>
+                <div class="mc-text-center"><a href="mSignup.html" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+            </div>
+        </div>
+
+    </div><!-- /content -->
+    <script type="text/javascript">
+        $(function() {
+            console.log("Test!");
+            $('#btn-submit').on('click', function(e){
+                e.preventDefault();
+                console.log("button is show..");
+
+                //var teset =  $("#form-signUp").serialize();
+                var test = {
+                    txt_user_id : $('#txt_user_id').val(),
+                    txt_name : $('#txt_name').val()
+                }
+
+                $.ajax({
+                    url		: "/main/signup",
+                    type	: "POST",
+                    data	: test,
+                    success	: function(data) {
+                        console.log("sucess..");
+                    },
+                    error	: function(request, status, error) {
+                        console.log(error);
+                    }
+                });
+
+
+            });
+
+            $('#pageSignup').on('pageshow', function(event) {
+
+                //city, gu를 가져온다.
+
+                initInformation();
+
+
+                /*$('#btn-submit').on('click', function(e){
+                    e.preventDefault();
+                    console.log("button is show..");
+                    $.ajax({
+                        url		: "/main/signup",
+                        type	: "POST",
+                        data	: $("#form-signUp").serialize(),
+                        success	: function(data) {
+                            console.log("sucess..");
+                        },
+                        error	: function(request, status, error) {
+                            console.log(error);
+                        }
+                    });
+
+
+                });*/
+
+            });
+
+            function initInformation()
+            {
+                getAddresInformation(getPartInformation)
+
+
+            }
+            function getAddresInformation(callback)
+            {
+                getCityInformation(createCityHtml);
+                createBodyTypeHtml();
+                callback();
+            }
+
+            function getCityInformation(callback)
+            {
+                console.log("getAddressInformation");
+                //inner
+                $.ajax({
+                    url		: "/info/city",
+                    type	: "GET",
+                    success	: function(data) {
+                        console.log("sucess..");
+
+                        callback(data);
+                    },
+                    error	: function(request, status, error) {
+                        console.log(error);
+                    }
+                });
+
+
+
+            }
+
+            function getGuInformation(cityObjId, callback)
+            {
+                console.log("getGuInformation");
+                $.ajax({
+                    url		: "/info/gu/" + cityObjId,
+                    type	: "GET",
+                    success	: function(data) {
+                        console.log("sucess..");
+
+                        callback(data);
+                    },
+                    error	: function(request, status, error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            function createGuHtml(array) {
+
+                $('#sel_gu').empty();
+
+                for (var i in array) {
+                    var obj = array[i];
+                    var option = $('<option>').attr({'value': obj._id}).append(obj.guName).appendTo('#sel_gu');
+                }
+            }
+
+
+
+            function createCityHtml(array) {
+
+                for (var i in array) {
+                    var obj = array[i];
+                    var option = $('<option>').attr({'value': obj._id}).append(obj.name).appendTo('#sel_city');
+                }
+
+                $('#sel_city').on('change', function (e) {
+
+                    console.log("sel city value : " + $(this).val());
+
+                    getGuInformation($(this).val(), createGuHtml);
+
+                })
+            }
+
+            function createBodyTypeHtml()
+            {
+                var bodyType = [
+                    {
+                        name : "외배엽"
+                    },
+                    {
+                        name : "중배엽"
+                    },
+                    {
+                        name : "내배엽"
+                    }
+                ];
+
+                for(var i in bodyType) {
+                    var option = $('<option>').attr({'value': i}).append(bodyType[i].name).appendTo('#txt_body_type');
+                }
+            }
+
+
+
+
+            function createPartHtml(array) {
+
+                for (var i in array) {
+                    var obj = array[i];
+                    var option = $('<option>').attr({'value': obj._id}).append(obj.partName).appendTo('#sel_interested_part');
+                    var option = $('<option>').attr({'value': obj._id}).append(obj.partName).appendTo('#sel_strong_part');
+                    var option = $('<option>').attr({'value': obj._id}).append(obj.partName).appendTo('#sel_weak_part');
+                }
+
+    /*            $('#sel_city').on('change', function (e) {
+
+                    console.log("sel city value : " + $(this).val());
+
+                    getGuInformation($(this).val(), createGuHtml);
+
+                })*/
+            }
+
+
+
+            function getPartInformation()
+            {
+                $.ajax({
+                    url		: "/info/part",
+                    type	: "GET",
+                    success	: function(data) {
+                        console.log("sucess..");
+
+                        createPartHtml(data);
+
+                    },
+                    error	: function(request, status, error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+
+        function signUp()
+        {
+
+        }
+
+        });
+
+    </script>
+</div><!-- /page -->
+
+
+</body>
+</html>

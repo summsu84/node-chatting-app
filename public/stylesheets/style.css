@@ -1,0 +1,38 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+#employeePic {
+  float: left;
+  padding-right: 10px;
+  padding-bottom: 16px;
+}
+
+#employeeDetails p {
+  margin-top: 0px;
+  margin-bottom: 8px;
+}
+
+#actionList {
+  clear: both;
+}
+
+.message
+{
+  padding: 5px 5px 5px 5px;
+}
+.username
+{
+  font-weight: bold;
+  color: #0f0;
+}
+.msgContainerDiv
+{
+  overflow-y: scroll;
+  height: 250px;
+}
+

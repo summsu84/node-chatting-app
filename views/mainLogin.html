@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link href="../stylesheets/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../javascripts/moment.min.js"></script>
+    <script src="../javascripts/common.js"></script>
+    <!--<script src="/socket.io/socket.io.js"></script>-->
+    <script src="../javascripts/mainLogin.js"></script>
+    <!--<script src="../javascripts/mMain.js"></script>-->
+    <!--<script src="../javascripts/mMainProfile.js"></script>-->
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header" data-theme="c">
+            <h1>로그인</h1>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+            <h3>Sign In</h3>
+            <label for="txt-username">User Name</label>
+            <input type="text" name="txt-username" id="txt-username" value="">
+            <label for="txt-password">Password</label>
+            <input type="password" name="txt-password" id="txt-password" value="">
+            <fieldset data-role="controlgroup">
+                <input type="checkbox" name="chck-rememberme" id="chck-rememberme" checked="">
+                <label for="chck-rememberme">Remember me</label>
+            </fieldset>
+            <a href="mMain.html" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Submit</a>
+            <p class="mc-top-margin-1-5"><a href="begin-password-reset.html">Can't access your account?</a></p>
+            <!--<p class="mc-top-margin-1-5"><a href="mSignup.html">Signup</a></p> 테스트 전-->
+            <p class="mc-top-margin-1-5"><a href="#pageSignup">Signup</a></p>
+
+            <div data-role="popup" id="dlg-invalid-credentials" data-dismissible="false" style="max-width:400px;">
+                <div role="main" class="ui-content">
+                    <h3 class="mc-text-danger">Login Failed</h3>
+                    <p>Did you enter the right credentials?</p>
+                    <div class="mc-text-center"><a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+                </div>
+            </div>
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+    <div data-role="page" id="pageSignup" >
+        <div data-role="header" data-theme="c" data-add-back-btn="true">
+            <h1>가입하기</h1>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+            <h3>Sign Up</h3>
+            <label for="txt-user-name">아이디</label>
+            <input type="text" name="txt-user-name" id="txt-user-name" value="">
+            <label for="txt-name">이름</label>
+            <input type="text" name="txt-name" id="txt-name" value="">
+            <label for="sel-address">주소</label>
+            <!--<input type="text" name="txt-address" id="txt-address" value="">-->
+            <select name="sel-address" id="sel-address"></select>
+            <label for="txt-body-type">체형</label>
+            <select name="txt-body-type" id="txt-body-type"></select>
+
+            <label for="sel-intersted-part">관심 부위</label>
+            <select name="sel-intersted-part" id="sel-intersted-part"></select>
+
+            <label for="sel-strong-part">강한 부위</label>
+            <select name="sel-strong-part" id="sel-strong-part"></select>
+            <label for="sel-weak-part">약한 부위</label>
+            <select name="sel-weak-part" id="sel-weak-part"></select>
+            <label for="txt-password">비밀번호</label>
+            <input type="password" name="txt-password2" id="txt-password2" value="">
+            <label for="txt-password-confirm">비밀번호 확인</label>
+            <input type="password" name="txt-password-confirm" id="txt-password-confirm" value="">
+            <a href="#dlg-sign-up-sent" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit2" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Submit</a>
+            <div data-role="popup" id="dlg-sign-up-sent" data-dismissible="false" style="max-width:400px;">
+                <div data-role="header">
+                    <h1>Almost done...</h1>
+                </div>
+                <div role="main" class="ui-content">
+                    <h3>Confirm Your Email Address</h3>
+                    <p>We sent you an email with instructions on how to confirm your email address. Please check your inbox and follow the instructions in the email.</p>
+                    <div class="mc-text-center"><a href="sign-in.html" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+                </div>
+            </div>
+
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+
+
+
+</body>
+</html>

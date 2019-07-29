@@ -1,0 +1,103 @@
+/*!
+ * Start Bootstrap - SB Admin 2 (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+.tabcontent {
+    display: block;
+    margin:0px auto;
+    width: 700px;
+    height: 400px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    box-shadow:0px 3px 3px #e3e4e6;
+    color: #637277;
+}
+
+
+.panel {
+    display: none;
+}
+
+
+/* Login */
+
+.divLogin {
+    text-align:center;
+    display: block;
+    margin:0px auto;
+    width: 700px;
+    height: 400px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    box-shadow:0px 3px 3px #e3e4e6;
+    color: #637277;
+}
+
+#chatform {
+    width:700px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.divChatFrom{
+    text-align:center;
+    display: block;
+    margin:0px auto;
+    width: 700px;
+    height: 400px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    box-shadow:0px 3px 3px #e3e4e6;
+    color: #637277;
+}
+
+.divChatFrom{
+    display : none;
+}
+
+.divLogin{
+    display: none;
+}
+
+/** Chat **/
+/*#dialogChat*/
+.chatscreen
+{
+    height: 400px;
+    overflow:scroll;
+
+}
+
+
+footer {
+    /*position:fixed;*/
+    bottom:0;
+    left:0;
+    /*width:100%;*/
+    padding-top: 30px;
+    background-color: white;
+    height: 130px;
+}
+#chatform {
+    width:700px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+#message {
+    width: 200px;
+    height: 80px;
+    display: block;
+    float:left;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    padding-left: 20px;
+    padding-top: 20px;
+    /*resize: none;*/
+    font:inherit;
+    color:inherit;
+}

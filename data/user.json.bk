@@ -1,0 +1,93 @@
+{
+  "kevin": {
+    "password": "1234",
+    "name": "케빈",
+    "address": "강서구",
+    "interestedPart" : "등",
+    "bodyType" : "내배엽",
+    "weakPart" : "다리",
+    "strongPart" : "등",
+    "filter" : {
+      "f_address" : "강서구",
+      "f_bodyType" : "중배엽"
+    },
+    "friend" : [
+        {"name" : "veloper" },
+        {"name" : "myki"}
+      ]
+  },
+  "veloper": {
+    "password": "1234",
+    "name": "밸로퍼",
+    "address": "강서구",
+    "interestedPart" : "팔",
+    "bodyType" : "내배엽",
+    "weakPart" : "등",
+    "strongPart" : "팔",
+    "filter" : {
+      "f_address" : "강서구",
+      "f_bodyType" : "외배엽"
+    },
+    "friend" : [
+      {"name" : "kevin" },
+      {"name" : "myki"}
+    ]
+  },
+  "myki": {
+    "password": "1234",
+    "name": "마이키",
+    "address": "강서구",
+    "interestedPart" : "대퇴사두근",
+    "bodyType" : "중배엽",
+    "weakPart" : "대퇴이두근",
+    "strongPart" : "팔",
+    "filter" : {
+      "f_address" : "강서구",
+      "f_bodyType" : "내배엽"
+    },
+    "friend" : [
+      {"name" : "niki" },
+      {"name" : "strange"},
+      {"name" : "kevin"}
+    ]
+  },
+  "niki": {
+    "password": "1234",
+    "name": "니키드",
+    "address": "강서구",
+    "interestedPart" : "이두근",
+    "bodyType" : "외배엽",
+    "weakPart" : "대퇴사두근",
+    "strongPart" : "이두근",
+    "filter" : {
+      "f_address" : "강서구",
+      "f_bodyType" : "내배엽"
+    }
+  },
+  "mung": {
+    "password": "1234",
+    "name": "멍",
+    "address": "양천구",
+    "interestedPart" : "대퇴사두근",
+    "bodyType" : "중배엽",
+    "weakPart" : "대퇴이두근",
+    "strongPart" : "팔",
+    "filter" : {
+      "f_address" : "강서구",
+      "f_bodyType" : "내배엽"
+    }
+  },
+  "strange": {
+    "password": "1234",
+    "name": "스트렝저",
+    "address": "양천구",
+    "interestedPart" : "등",
+    "bodyType" : "중배엽",
+    "weakPart" : "대퇴이두근",
+    "strongPart" : "팔",
+    "filter" : {
+      "f_address" : "강서구",
+      "f_bodyType" : "내배엽"
+    }
+  }
+}

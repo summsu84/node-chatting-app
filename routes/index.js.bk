@@ -1,0 +1,234 @@
+// This file is required by app.js. It sets up event listeners
+// for the two main URL endpoints of the application - /create and /chat/:id
+// and listens for socket.io messages.
+
+// Use the gravatar module, to turn email addresses into avatar images:
+
+var gravatar = require('gravatar');
+
+// Export a function, so that we can pass
+// the app and io instances from the app.js file:
+
+//최초 요청시 home을 보여준다..
+module.exports = function(app,io){
+
+  app.get('/', function(req, res){
+
+    // Render views/home.html
+    res.render('home');
+  });
+
+  //chat2
+
+  app.get('/chat2', function(req,res){
+
+    res.render('chat2');
+  });
+
+  //create url에 대해서 랜덤 숫자 생성하고 채팅방 생성한다.
+  app.get('/create', function(req,res){
+
+    // Generate unique id for the room
+    var id = Math.round((Math.random() * 1000000));
+
+    // Redirect to the random room
+    res.redirect('/chat/'+id);
+  });
+
+  //채팅방을 보여준다.
+  app.get('/chat/:id', function(req,res){
+
+    // Render the chant.html view
+    res.render('login');
+  });
+
+  // Initialize a new socket.io application, named 'chat'
+  // 아래부터 소켓 연결 이후 자바스크립트..
+  var chat = io.on('connection', function (socket) {
+
+    console.log("socket is connected...");
+
+    // When the client emits the 'load' event, reply with the
+    // number of people in this chat room
+
+    //load 호출시..
+    socket.on('load',function(data){
+
+      //room을 설정 한다..data 값은 id 값..io는 io.sockets
+      /*var room = findClientsSocket(io,data);
+      console.log("room number : " + room);
+      if(room.length === 0 ) {
+
+        socket.emit('peopleinchat', {number: 0});
+      }
+      else if(room.length === 1) {
+
+        socket.emit('peopleinchat', {
+          number: 1,
+          user: room[0].username,
+          avatar: room[0].avatar,
+          id: data
+        });
+      }
+      else if(room.length >= 2) {
+
+        chat.emit('tooMany', {boolean: true});
+      }*/
+      socket.emit('peopleinchat', {number: 0});
+    });
+
+    // When the client emits 'login', save his name and avatar,
+    // and add them to the room
+    socket.on('login', function(data) {
+
+      console.log("[server] on login - data name : " + data.user + " , avatar : " + data.avatar);
+
+      /* var room = findClientsSocket(io, data.id);
+       // Only two people per room are allowed
+       if (room.length < 2) {
+
+       // Use the socket object to store data. Each client gets
+       // their own unique socket object
+
+       socket.username = data.user;
+       socket.room = data.id;            //room 설정하기...
+       socket.avatar = gravatar.url(data.avatar, {s: '140', r: 'x', d: 'mm'});
+
+       // Tell the person what he should use for an avatar
+       socket.emit('img', socket.avatar);
+
+
+       // Add the client to the room (room으로 접속)
+       socket.join(data.id);
+
+       if (room.length == 1) {
+
+       var usernames = [],
+       avatars = [];
+
+       usernames.push(room[0].username);
+       usernames.push(socket.username);
+
+       avatars.push(room[0].avatar);
+       avatars.push(socket.avatar);
+
+       // Send the startChat event to all the people in the
+       // room, along with a list of people that are in it.
+
+       chat.in(data.id).emit('startChat', {
+       boolean: true,
+       id: data.id,
+       users: usernames,
+       avatars: avatars
+       });
+       }
+       }
+       else {
+       socket.emit('tooMany', {boolean: true});
+       }
+       });*/
+      socket.username = data.user;
+      socket.room = data.id;            //room 설정하기...
+      socket.avatar = gravatar.url(data.avatar, {s: '140', r: 'x', d: 'mm'});
+
+      // Tell the person what he should use for an avatar
+      socket.emit('img', socket.avatar);
+
+
+      // Add the client to the room (room으로 접속)
+      socket.join(data.id);
+    });
+
+    // Somebody left the chat
+    socket.on('disconnect', function() {
+
+      // Notify the other person in the chat room
+      // that his partner has left
+
+      socket.broadcast.to(this.room).emit('leave', {
+        boolean: true,
+        room: this.room,
+        user: this.username,
+        avatar: this.avatar
+      });
+
+      // leave the room
+      socket.leave(socket.room);
+    });
+
+
+    // Handle the sending of messages
+    socket.on('msg', function(data){
+
+      console.log("[server] on msg - data.msg : " + data.msg + ", socket room : " + socket.room);
+      // When the server receives a message, it sends it to the other person in the room.
+      socket.broadcast.to(socket.room).emit('receive', {msg: data.msg, user: data.user, img: data.img});
+    });
+  });
+};
+
+
+//클라이언트 소켓 검색..
+function findClientsSocket(io,roomId, namespace) {
+
+  var res = [],
+      ns = io.of(namespace ||"/");    // the default namespace is "/"
+
+  if (ns) {
+    for (var id in ns.connected) {
+
+      if(roomId) {
+              //var index = ns.connected[id].rooms.id.indexOf(roomId) ;
+        //index 찾기 roomId가 있으면.. res에 집어 넣는다..
+        var index;
+        if(ns.connected[id].hasOwnProperty('room')) {
+         // index =  ns.connected[id].room.indexOf(roomId) ;
+          if(ns.connected[id].room == roomId)
+          {
+            index = 1;
+          }else {
+            index = -1;
+          }
+
+        }else {
+          index = -1;
+
+        }
+
+        //방이 없다..
+        if(index !== -1) {
+
+          res.push(ns.connected[id]);
+        }
+      }
+      //방이 존재 하지 않는다.
+      else {
+
+        res.push(ns.connected[id]);
+      }
+    }
+  }
+  return res;
+}
+
+
+/*
+
+//클라이언트 소켓 검색..
+function findClientsSocket2(io,roomId, namespace) {
+  var rooms = io.socket.manager.rooms;
+
+  for(var key in rooms)
+  {
+    if(rooms[key].length == 1){
+
+    }
+  }
+  //빈방이 없으면..
+  socket.join(socket.id);
+  socketRoom[socket.id] = socket.id;
+
+
+}
+*/
+

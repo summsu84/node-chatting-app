@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>채팅</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../stylesheets/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../stylesheets/chatstyle.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row chat-window col-lg-12" id="chat_window_1" style="margin-left:10px;">
+            <div class="col-xs-12 col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading top-bar">
+                        <div class="col-md-8 col-xs-8">
+                            <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Chat - Miguel</h3>
+                        </div>
+                        <div class="col-md-4 col-xs-4" style="text-align: right;">
+                            <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_minim"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-remove icon_close" data-id="chat_window_1"></span></a>
+                        </div>
+                    </div>
+                    <div class="panel-body msg_container_base col-lg-12">
+<!--                        <ul class="chats col-lg-12">
+                            &lt;!&ndash; The chat messages will go here &ndash;&gt;
+                        </ul>-->
+                    </div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <form id="chatform">
+
+                                <textarea id="message" placeholder="Write something.."></textarea>
+                                <input type="submit" id="submit" value="SEND"/>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group dropup">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-cog"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#" id="new_chat"><span class="glyphicon glyphicon-plus"></span> Novo</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-list"></span> Ver outras</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-remove"></span> Fechar Tudo</a></li>
+                <li class="divider"></li>
+                <li><a href="#"><span class="glyphicon glyphicon-eye-close"></span> Invisivel</a></li>
+            </ul>
+        </div>
+    </div>
+
+<!-- jQuery -->
+<script src="../javascripts/jquery/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="../javascripts/bootstrap/bootstrap.min.js"></script>
+<script src="../javascripts/moment.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<!-- Custom JavaScript -->
+<script src="../javascripts/chat2.js"></script>
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script style="text/javascript">
+    $(document).ready(function() {
+
+    });
+</script>
+</body>
+</html>

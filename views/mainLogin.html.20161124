@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<!--
+	This file is rendered by express.js, when the rurl /chat/123456 is visited in a browser.
+	It includes jQuery, socket.io.js (it is automatically served by the socket.io library),
+	and a few more JavaScript files that you should check out.
+-->
+
+<html>
+
+<head>
+
+    <title>Private chat room | Tutorialzine Demo</title>
+
+    <link type="text/css" rel="stylesheet" href="../stylesheets/mat_stylesheet.css" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans Condensed:300italic,300,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+
+<body>
+
+<header class="banner">
+
+    <h1 class="bannertext">
+        <a href="http://tutorialzine.com/2014/03/nodejs-private-webchat/" id="logo">Tutorial<span>zine</span>: NODE.JS CHAT TUTORIAL</a>
+    </h1>
+
+</header>
+
+
+<section class="section">
+
+    <!-- These elements are displayed as white info cards in the middle of the screen -->
+
+    <!-- 로그인 -->
+    <div class="connected">
+
+        <img src="../images/unnamed.jpg" id="creatorImage" />
+
+        <!-- 접속 정보 -->
+        <div class="infoConnected">
+            <h2>Who are you?</h2>
+            <br/>
+
+            <form class="loginForm" action="/login2" method="post">
+                <input type="text" name="yourName" id="yourName" placeholder="Your nick name" /><br/>
+                <!-- 지역설정 -->
+                <!--                <input list="yourAddress" name="yourAddresss">
+                                <datalist id="yourAddress">
+                                    <option value="강남구">
+                                    <option value="강북구">
+                                    <option value="강서구">
+                                    <option value="강동구">
+                                </datalist>
+                                <br/>-->
+                <input type="text" name="yourPassword" id="yourPassword" placeholder="Your Password" /><br/>
+                 <input type="submit" id="yourEnter" value="ENTER" />
+                <input type="button" id="btnSiginUp" value="SIGN Up" />
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- 회원 가입 다이얼로그-->
+    <div class="signUp" id="dialogSiginUp" title="회원가입" style="display:none">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">회원 정보</h1>
+                <hr />
+            </div>
+        </div>
+        <div class="main-login main-center">
+            <form class="form-horizontal" id="signUpForm" method="post" action="#">
+
+                <div class="form-group">
+                    <label for="username" class="cols-sm-2 control-label">Your ID</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="username" id="username"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Your Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="name" id="name"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address" class="cols-sm-2 control-label">Address</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="address" id="address"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="interestedPart" class="cols-sm-2 control-label">부위</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="interestedPart" id="interestedPart"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bodyType" class="cols-sm-2 control-label">체형</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="bodyType" id="bodyType"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="strongPart" class="cols-sm-2 control-label">강한부위</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="strongPart" id="strongPart"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="weakPart" class="cols-sm-2 control-label">약한부위</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="weakPart" id="weakPart"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">Password</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button" id="btnSignInSignUp">가입</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnSignInCancel">취소</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../javascripts/moment.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../javascripts/mainLogin.js"></script>
+
+</section>
+</body>
+
+</html>

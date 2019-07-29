@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div data-role="page" id="mainUserProfileEdit">
+    <div data-role="header" data-position="fixed">
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>수정하기</h1>
+    </div>
+
+    <div data-role="content">
+
+        <form method="post" action="#" id="form_profileEdit">
+            <label for="sel_item"></label>
+            <!--<input type="text" name="txt-address" id="txt-address" value="">-->
+            <select name="sel_item" id="sel_item"></select>
+            <a href="#dlg-sign-up-sent" data-rel="popup" data-transition="pop" data-position-to="window" id="btn_cancel" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">취소</a>
+            <a href="#dlg-sign-up-sent" data-rel="popup" data-transition="pop" data-position-to="window" id="btn_submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">저장</a>
+        </form>
+
+
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            console.log("Test!");
+            $('#mainUserProfileEdit').on('pageshow', function (event) {
+
+                var parameters = $(this).data("url").split("?")[1];
+                var parameter = parameters.replace("structure=","");
+                console.log("parameter : " + parameter);
+
+                var title = parameter.split("&")[0];
+                var val = parameter.split("&")[1];
+
+                var titleVal = title.split("=")[1];
+                titleVal = titleVal.replace("+"," ");
+                var valVal = val.split("=")[1];
+
+                initPage(titleVal, valVal);
+                initButton();
+            });
+
+            function initButton()
+            {
+                $('#btn_submit').on('click', function(e){
+                    e.preventDefault();
+
+                    //필터 저장한다.
+                    var title = $('#form_profileEdit').find('label').html();
+
+                    var filter = {};
+                    if(title === "관심 부위")
+                    {
+                        filter.type = "filterInterestedPart";
+                    }else if(title === "관심 체형")
+                    {
+                        filter.type = "filterBodyType";
+                    }else
+                    {
+                        filter.type = "filterAddress";
+                    }
+
+                    filter.val = $("#sel_item option:selected").html();
+                    console.log("button is clicked.. title : " + title + ", filter : " + filter.val);
+                    $.ajax({
+                        url		: "/conf/userProfileFilterUpdate/",
+                        type	: "POST",
+                        dataType: 'json',
+                        data: {filter: filter},
+                        success	: function(data) {
+                            console.log("sucess..");
+                        },
+                        error	: function(request, status, error) {
+                            console.log(error);
+                        }
+                    });
+                })
+            }
+
+            function initPage(title, val)
+            {
+                console.log("initPage title : " + title + ", val " + val);
+                $('#form_profileEdit').find('label').html(title);
+                if(title === "체형")
+                {
+                    createBodyTypeHtml();
+                }else {
+                    //다 부위이니까..
+                    createBody();
+
+                }
+
+
+            }
+
+            function createBody()
+            {
+                $.ajax({
+                    url		: "/info/part",
+                    type	: "GET",
+                    success	: function(data) {
+                        console.log("sucess..");
+                        var option = $('<option>').attr({'value': '0'}).append("").appendTo('#sel_item');
+                        for (var i in data) {
+                            var obj = data[i];
+                            var option = $('<option>').attr({'value': obj._id}).append(obj.partName).appendTo('#sel_item');
+
+                        }
+
+                    },
+                    error	: function(request, status, error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            function createBodyTypeHtml()
+            {
+                var bodyType = [
+                    {
+                        name : "외배엽"
+                    },
+                    {
+                        name : "중배엽"
+                    },
+                    {
+                        name : "내배엽"
+                    }
+                ];
+
+                for(var i in bodyType) {
+                    var option = $('<option>').attr({'value': i}).append(bodyType[i].name).appendTo('#sel_item');
+                }
+            }
+        });
+        </script>
+</div>
+</body>
+</html>

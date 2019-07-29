@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="../stylesheets/mainProfile.css" rel="stylesheet">
+
+    <!-- Website Font style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+    <title>Admin</title>
+</head>
+<body>
+<div class="panel col-md-3" id="dialogFriendConf" title="친구찾기설정" style="display:none">
+    <div class="row main">
+        <div class="main-login main-center">
+            <form class="form-horizontal" id="friendConfForm" method="post" action="#">
+
+                <div class="form-group">
+                    <label for="dg_conf_address" class="cols-sm-2 control-label">지역 설정</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="address" id="dg_conf_address" value="test" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dg_conf_interestedPart" class="cols-sm-2 control-label">관심 부위 설정</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="interestedPart" id="dg_conf_interestedPart" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dg_conf_bodyType" class="cols-sm-2 control-label">체형 설정</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="bodyType" id="dg_conf_bodyType" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dg_conf_weakPart" class="cols-sm-2 control-label">부족한 부분 설정</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control " name="confirm" id="dg_conf_weakPart"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dg_conf_strongPart" class="cols-sm-2 control-label">강한 부분 설정</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control " name="strongPart" id="dg_conf_strongPart"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <button type="submit"class="btn btn-primary btn-lg btn-block login-button" id="btnFriendConfApply">적용하기</button>
+                    <button type="button"class="btn btn-primary btn-lg btn-block login-button" id="btnFriendConfInit">초기화</button>
+                    <button type="button"class="btn btn-primary btn-lg btn-block login-button" id="btnFriendConfCancel">취소</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../javascripts/moment.min.js"></script>
+
+<script src="../javascripts/mainProfile.js"></script>
+
+</body>
+</html>

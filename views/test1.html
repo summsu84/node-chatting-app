@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../javascripts/external.js"></script>
+<!--    <script type="text/javascript">
+
+        function checkSupportsImport() {
+
+            console.log( 'import' in document.createElement('link') );
+
+            return 'import' in document.createElement('link');
+
+        }
+
+
+
+        if ( checkSupportsImport() ){
+
+            //여기서 부터 시작
+
+            var link = document.createElement('link'); //link element생성
+
+            link.rel = 'import'; //이건 꼭 써 줘야 된다. 안그럼 import안된다.
+
+            link.href = "/../views/testContents.html"; //읽을 파일
+
+            link.onload = function(e) {
+
+                //파일이 읽어지면 여기서 id="contents" 부분에 넣으면 된다.
+
+                //넣고 싶은 부분만 넣을 수도 있다.
+
+                var loadHtmlFile = this.import.querySelector('html');
+
+                var contents  = document.querySelector('#contents');
+
+                contents.appendChild(loadHtmlFile.cloneNode(true));
+
+            };
+
+            document.head.appendChild(link);
+
+        }else{
+
+            //안되면 오류 처리를 여기 코딩
+
+            alert("안된다 ㅜㅜ ");
+
+        }
+
+    </script>-->
+    <title>External JS Globals - index.php</title>
+</head>
+<body>
+<button type="button" id="button1" onclick="f1();"> fire f1 </button>
+<br />
+<button type="button" id="button2" onclick="f2();"> fire f2 </button>
+<br />
+
+<div id="contents">
+
+</div>
+</body>
+</html>

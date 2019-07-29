@@ -1,0 +1,54 @@
+{
+  "kevin": [
+    {
+      "day": 1,
+      "ex": [
+        {
+          "partName": "가슴",
+          "exList": [
+            {
+              "exName": "벤치프레스",
+              "exEa": "1",
+              "exSet": "2"
+            },
+            {
+              "exName": "인클라인벤치프레스",
+              "exEa": "1",
+              "exSet": "2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "ex": [
+        {
+          "partName": "등",
+          "exList": [
+            {
+              "exName": "풀업",
+              "exEa": "1",
+              "exSet": "2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "ex": [
+        {
+          "partName": "이두",
+          "exList": [
+            {
+              "exName": "바벨컬",
+              "exEa": "1",
+              "exSet": "2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

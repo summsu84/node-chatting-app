@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+
+<body>
+
+<!--<div id="detailsPage" data-role="page" data-add-back-btn="true">-->
+<div data-role="page" id="mainUserProfile">
+    <div data-role="header" data-position="fixed">
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>Welcome</h1>
+    </div>
+
+    <div data-role="content">
+
+        <img id="mainUserImg"/>
+        <div id="mainUserDetail">
+            <h3 id="mainUserFullName"></h3>
+            <p id="mainUserId"></p>
+            <p id="mainUserCity"></p>
+        </div>
+
+        <ul id="mainUserProfileActionList" data-role="listview" data-inset="true"></ul>
+        <ul id="mainUserProfileFilterActionList" data-role="listview" data-inset="true"></ul>
+
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            console.log("Test!");
+            $('#mainUserProfile').on('pageshow', function (event) {
+
+                //1. 세션으로 부터 사용자 정보를 가져온다.
+                initMainUserProfile();
+                /*
+                //get 요청
+                $.ajax({
+                    url: "/main/profileRequest/" + userId,
+                    type: "GET",
+                    success: function (data) {
+
+                        console.log("data.. : " + data);
+                        //여기에 프로파일 정보 보여준다..
+                        displayUserProfile(data);
+                    },
+                    error: function (request, status, error) {
+                        console.log(error);
+                    }
+                });*/
+
+                //2. 해당 사용자에 대한 정보를 listview에 출력한다.
+
+                //3.
+
+
+            });
+
+            function initMainUserProfile()
+            {
+                //세션 정보를 가져온다..
+                console.log("initMainUserProfile is called..");
+                $.ajax({
+                    url: "/main/userInfoRequest",
+                    type: "GET",
+                    success: function (data) {
+                        console.log("data.. : " + data);
+                        //여기에 프로파일 정보 보여준다..
+                        var result = data.result;
+                        createMainUserProfileList(result);
+                    },
+                    error: function (request, status, error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            /**
+             *  사용자 정보리스트를 생성한다.
+             * @param data
+             */
+
+            function createMainUserProfileList(data)
+            {
+                console.log(data.userId);
+                $('#mainUserImg').attr('src', '../images/unnamed.jpg');
+                $('#mainUserFullName').text(data.name);
+                $('#mainUserId').text(data.userId);
+                $('#mainUserCity').text(data.city + " " + data.gu);
+                //console.log(employee.officePhone);
+
+                //관심 부위 0
+                $('#mainUserProfileActionList').append('<li><a href="#"><h3>관심 부위</h3>' +
+                        '<p>' + data.interestedPart + '</p></a></li>');
+
+                //체형 1
+                $('#mainUserProfileActionList').append('<li><a href="#"><h3>체형</h3>' +
+                        '<p>' + data.bodyType + '</p></a></li>');
+                //2
+                $('#mainUserProfileActionList').append('<li><a href="#"><h3>강한 부위</h3>' +
+                        '<p>' + data.strongPart + '</p></a></li>');
+
+                //3
+                $('#mainUserProfileActionList').append('<li><a href="#"><h3>약한 부위</h3>' +
+                        '<p>' + data.weakPart + '</p></a></li>');
+
+                //필터 정보
+                //필터 정보를 요청한다.
+                console.log("initMainUserProfile is called..");
+                $.ajax({
+                    url: "/main/userFilterInfoRequest",
+                    type: "GET",
+                    success: function (data) {
+                        console.log("data.. : " + data.resultSucess);
+                        //여기에 프로파일 정보 보여준다..
+                        createMainUserProfileFilterList(data);
+                    },
+                    error: function (request, status, error) {
+                        console.log(error);
+                    }
+                });
+
+            }
+
+            function createMainUserProfileFilterList(data)
+            {
+                var result = data;
+                if(data.resultSucess === -1)
+                {
+                    //필터 조건 없는 경우..
+                    $('#mainUserProfileFilterActionList').append('<li><a href="#"><h3>관심 부위</h3>' +
+                            '<p>' + '없음' + '</p></a></li>');
+                    //f_2
+                    $('#mainUserProfileFilterActionList').append('<li><a href="#"><h3>관심 지역</h3>' +
+                            '<p>' + '없음' + '</p></a></li>');
+                    //f_3
+                    $('#mainUserProfileFilterActionList').append('<li><a href="#"><h3>관심 체형</h3>' +
+                            '<p>' + '없음' + '</p></a></li>');
+                }else {
+                    //f_1obj.hasOwnProperty(fileUserSchedule)
+                    if(result.hasOwnProperty("filterInterestedPart")){
+                        // The property exists
+                        $('#mainUserProfileFilterActionList').append('<li><a href="#"><h3>관심 부위</h3>' +
+                                '<p>' + result.filterInterestedPart + '</p></a></li>');
+
+                    }else{
+                        // The property DOESN'T exists
+                        $('#mainUserProfileFilterActionList').append('<li><a href="#"><h3>관심 부위</h3>' +
+                                '<p>' + '없음' + '</p></a></li>');
+                    }
+
+                    if(result.hasOwnProperty("filterAddress")){
+                        // The property exists
+                        //f_2
+                        $('#mainUserProfileFilterActionList').append('<li><a href="#"><h3>관심 지역</h3>' +
+                                '<p>' + result.filterAddress + '</p></a></li>');
+
+                    }else{
+                        // The property DOESN'T exists
+                        $('#mainUserProfileFilterActionList').append('<li><a href="#"><h3>관심 지역</h3>' +
+                                '<p>' + '없음' + '</p></a></li>');
+                    }
+
+                    if(result.hasOwnProperty("filterBodyType")){
+                        // The property exists
+                        //f_2
+                        $('#mainUserProfileFilterActionList').append('<li><a href="#"><h3>관심 체형</h3>' +
+                                '<p>' + result.filterBodyType + '</p></a></li>');
+
+                    }else{
+                        // The property DOESN'T exists
+                        $('#mainUserProfileFilterActionList').append('<li><a href="#"><h3>관심 체형</h3>' +
+                                '<p>' + '없음' + '</p></a></li>');
+                    }
+                }
+
+                $('#mainUserProfileActionList').listview('refresh');
+                $('#mainUserProfileFilterActionList').listview('refresh');
+
+
+                $('#mainUserProfileActionList').on('click', 'li', mainUserProfileActionListClicked);
+                $('#mainUserProfileFilterActionList').on('click', 'li', mainUserProfileActionListClicked);
+            }
+
+            function mainUserProfileActionListClicked ()
+            {
+
+                console.log("H3 : " + $(this).find('h3').html());
+                var title = $(this).find('h3').html();
+                var val = $(this).find('p').html();
+
+                var url = "mMainUserProfileEdit.html?title=" + title + "'&val="+val;
+                console.log("url : " + url);
+                $.mobile.changePage('mMainUserProfileEdit.html', {
+                    data: {
+                        'title': title,
+                        'val' : val
+                    }
+                });
+                //$.mobile.changePage('mMainUserProfileEdit.html', { dataUrl : url,  reloadPage : true, changeHash : true });
+                //$.mobile.changePage('page2.html', { dataUrl : "page2.html?paremeter=123", data : { 'paremeter' : '123' }, reloadPage : true, changeHash : true });
+            }
+        })
+    </script>
+</div>
+
+
+</body>
+
+</html>

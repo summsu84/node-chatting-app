@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- 채팅 -->
+<div data-role="page" id="chatPage" data-role="page" data-theme="a">
+
+    <div data-role="header" data-position="fixed">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>Welcome</h1>
+    </div>
+
+    <div data-role="content">
+        <div id="incomingMessages" name="incomingMessages" class="msgContainerDiv" ></div>
+        <label for="messageText"><strong>Message:</strong></label>
+        <textarea name="messageText" id="messageText"></textarea>
+
+        <fieldset class="ui-grid-a">
+            <div class="ui-block-a"><a href="#loginPage" id="goBackButton" data-role="button">Go Back</a></div>
+            <div class="ui-block-b"><button data-theme="a" id="chatSendButton" name="chatSendButton">Send</button>></div>
+        </fieldset>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+        <h4>Pub Nub Chat</h4>
+    </div>
+
+    <script type="text/javascript">
+        $(function() {
+
+            console.log("mMainChat.html is called.");
+        })
+    </script>
+</div>
+
+</body>
+</html>
